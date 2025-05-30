@@ -1,5 +1,5 @@
 # FIAP - Faculdade de Informática e Administração Paulista
-Projeto voltado a desenvolver soluções com Redes Neurais Convolucionais (CNN) e Detecão de Objetos com YOLO.
+Projeto voltado a desenvolver soluções com Redes Neurais Convolucionais (CNN) e Redes Recorrentes abordando problemas de séries temporais.
 
 <p align="center">
 <a href= "https://www.fiap.com.br/"><img src="assets/logo-fiap.png" alt="FIAP - Faculdade de Informática e Admnistração Paulista" border="0" width=40% height=40%></a>
