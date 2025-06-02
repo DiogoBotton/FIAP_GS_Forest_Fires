@@ -59,17 +59,18 @@ O modelo mostrou um rápido aumento na acurácia durante as primeiras épocas, c
 
 ### Gráficos de Acurácia e Perda
 
-![Acurácia por época](image_url: 3)
+![Acurácia por época](assets/cnn_zero_acuracia_por_epoca)
+
 
 *Este gráfico mostra a acurácia ao longo das épocas para os conjuntos de treinamento e validação.*
 
-![Perda por época](image_url: 2)
+![Perda por época](assets/cnn_zero_perda_por_epoca)
 
 *Este gráfico exibe a perda (loss) ao longo das épocas para os conjuntos de treinamento e validação.*
 
 ### Matriz de Confusão
 
-![Matriz de Confusão](image_url: 1)
+![Matriz de Confusão]((assets/cnn_zero_matriz_confusao)
 
 A matriz de confusão revela o seguinte:
 
@@ -92,7 +93,7 @@ accuracy                           0.94        68
 
 ### Curva ROC e AUC
 
-![Curva ROC](image_url: 0)
+![Curva ROC](assets/cnn_zero_roc_curve)
 
 A curva ROC e o valor AUC indicam um excelente desempenho do modelo na discriminação entre as classes "fire" e "no fire". O valor de AUC de 0.95 para ambas as classes reforça a capacidade do modelo de classificar corretamente as imagens.
 
