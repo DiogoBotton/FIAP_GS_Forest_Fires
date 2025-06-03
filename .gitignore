@@ -399,3 +399,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+src/WildFire_TimeSeries/dataset/tmp/focos_br_todos-sats_2024.csv
+src/WildFire_TimeSeries/dataset/focos_br_todos-sats_2022.csv
+src/WildFire_TimeSeries/dataset/focos_br_todos-sats_2023.csv
+src/WildFire_TimeSeries/dataset_2022.zip
+src/WildFire_TimeSeries/dataset_2023.zip
+src/WildFire_TimeSeries/dataset_2024.zip
