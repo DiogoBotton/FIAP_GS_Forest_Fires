@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ../src/API
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"

@@ -406,3 +406,4 @@ src/WildFire_TimeSeries/dataset/focos_br_todos-sats_2023.csv
 src/WildFire_TimeSeries/dataset_2022.zip
 src/WildFire_TimeSeries/dataset_2023.zip
 src/WildFire_TimeSeries/dataset_2024.zip
+src/api/cnn_model.h5
