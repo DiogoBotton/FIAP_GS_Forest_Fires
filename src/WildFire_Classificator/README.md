@@ -37,9 +37,9 @@ Observação: sinais claros de overfitting (train_loss→0 vs val_loss≈0.10).
 
 Observação: excelente generalização, mas maior custo computacional.
 
-![Acurácia por época](readme-imgs/cnn_zero_acuracia_por_epoca.png)
+![Matriz de confusão](readme-imgs/cnn_zero_matriz_confusao.png)
 
-![Perda por época](readme-imgs/cnn_zero_perda_por_epoca.png)
+![Curva ROC](readme-imgs/cnn_zero_roc_curve.png)
 
 
 # Interpretação do Fine-Tuning
@@ -49,10 +49,6 @@ Observação: excelente generalização, mas maior custo computacional.
 
 Observação: treinamento interrompido em 11/50 épocas via EarlyStopping.
 Este documento traz a análise dos resultados obtidos após o fine-tuning do modelo de classificação de imagens de queimadas.
-
-
-![Acurácia por época](readme-imgs/accuracy_per_epoch.png)  
-
 
 ## 📝 Conclusões e Próximos Passos
 
