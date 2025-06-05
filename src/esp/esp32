@@ -1,0 +1,93 @@
+// Projeto - https://wokwi.com/projects/432712668245983233
+// Site para monitorar em tempo real - https://thingspeak.mathworks.com/channels/2978911/private_show
+
+#include <WiFi.h>
+#include <ThingSpeak.h>
+
+// ====== 1) CREDENCIAIS WI-FI ======
+const char* ssid     = "Wokwi-GUEST";  // rede padrão do Wokwi
+const char* password = "";             // Wokwi-GUEST não tem senha
+
+// ====== 2) CANAL THINGSPEAK ======
+WiFiClient  client;
+const unsigned long channelID    = 2978911;           // canal
+const char*           writeAPIKey = "TOTTK66L75EN77RN"; // sua Write API Key
+
+// ====== 3) PINAGEM E SIMULAÇÃO ======
+#define MQ2_PIN    34
+#define LED_PIN     2
+
+float simTemperature = 25.0;
+float simHumidity    = 80.0;
+bool  tempIncreasing = true;
+int   simGasRaw      = 0;
+
+const unsigned long tsInterval = 20000;  // intervalo entre envios (ms)
+unsigned long       lastTS      = 0;
+
+void setup() {
+  Serial.begin(115200);
+  delay(500);
+
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(MQ2_PIN, INPUT);
+  randomSeed(micros());
+
+  // 1) Conecta ao Wi-Fi
+  Serial.print("Conectando ao Wi-Fi ");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.printf("\nConectado! IP: %s\n", WiFi.localIP().toString().c_str());
+
+  // 2) Inicializa ThingSpeak
+  ThingSpeak.begin(client);
+}
+
+void loop() {
+  // --- 1) Atualiza simulação de temperatura (25→40→25) ---
+  if (tempIncreasing) {
+    simTemperature += 0.5;
+    if (simTemperature >= 40.0) tempIncreasing = false;
+  } else {
+    simTemperature -= 0.5;
+    if (simTemperature <= 25.0) tempIncreasing = true;
+  }
+
+  // --- 2) Atualiza simulação de umidade (80→20→80) ---
+  simHumidity -= 0.5;
+  if (simHumidity < 20.0) simHumidity = 80.0;
+
+  // --- 3) Simulação MQ-2 (20% chance de valor alto) ---
+  simGasRaw = (random(0, 100) < 20) ? 3000 : 500;
+  float gasVoltage = simGasRaw * (3.3f / 4095.0f);
+
+  Serial.printf("Temp: %.1f°C  Hum: %.1f%%  Gas: %.2fV\n",
+                simTemperature, simHumidity, gasVoltage);
+
+  // --- 4) Alerta LED ---
+  bool alerta = (gasVoltage > 1.5) ||
+                (simTemperature > 35.0 && simHumidity < 30.0);
+  digitalWrite(LED_PIN, alerta ? HIGH : LOW);
+  if (alerta) Serial.println(">>> ALERTA: RISCO DE QUEIMADA!");
+
+  // --- 5) Envio ao ThingSpeak ---
+  unsigned long now = millis();
+  if (now - lastTS >= tsInterval) {
+    lastTS = now;
+
+    // Prepara campos do canal
+    ThingSpeak.setField(1, simTemperature);
+    ThingSpeak.setField(2, simHumidity);
+    ThingSpeak.setField(3, gasVoltage);
+
+    // Escreve todos os campos de uma vez
+    int responseCode = ThingSpeak.writeFields(channelID, writeAPIKey);
+    Serial.printf("ThingSpeak response: %d\n", responseCode);
+    // 200 = OK, 0 = erro de API key ou de rede
+  }
+
+  delay(5000);
+}
