@@ -2,7 +2,7 @@ version: '3.8'
 services:
   api:
     build:
-      context: ../src/API
+      context: ../src/api
       dockerfile: Dockerfile
     ports:
       - "80:80"

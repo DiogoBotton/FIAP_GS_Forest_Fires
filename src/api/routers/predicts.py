@@ -48,8 +48,8 @@ async def Fire_Detect(file: UploadFile = File(...)):
     nofire_prob = pred[0][1]
     
     return {
-        "fire": f'{(fire_prob * 100):.2f} %',
-        "nofire": f'{(nofire_prob * 100):.2f} %'
+        "fire": round(fire_prob * 100, 2),
+        "nofire": round(nofire_prob * 100, 2)
     }
     
 @router.post("/predict-risk", summary='Realiza a previsão do risco de fogo.')
@@ -58,6 +58,28 @@ async def Predict_Risk(data: PredictRiskRequest):
     ### Predição de riscos
 
     Realiza a previsão de risco de fogo para uma determinada região.
+    
+    **Enums validos para mês:**
+    - Janeiro = 1
+    - Fevereiro = 2
+    - Março = 3
+    - Abril = 4
+    - Maio = 5
+    - Junho = 6
+    - Julho = 7
+    - Agosto = 8
+    - Setembro = 9
+    - Outrubro = 10
+    - Novembro = 11
+    - Dezembro = 12
+    
+    **Enums válidos para bioma**
+    - Amazônia = 1
+    - Cerrado = 2
+    - Caatinga = 3
+    - Pantanal = 4
+    - Pampa = 5
+    - Mata Atlântica = 6
     """
     try:
         regression_model = tf.keras.models.load_model(regression_model_path)
@@ -85,7 +107,7 @@ async def Predict_Risk(data: PredictRiskRequest):
         'bioma_Mata Atlântica': [True if data.bioma == Bioma.MataAtlantica else False],
         'bioma_Pampa': [True if data.bioma == Bioma.Pampa else False],
         'bioma_Pantanal': [True if data.bioma == Bioma.Pantanal else False],
-        'ano_normalizado': [2],
+        'ano_normalizado': [2], # Deixado como 2 (2024) pois o modelo não leva muito em consideração o ano para prever o resultado
         'media_precipitacao': [data.precipitacao],
         'media_dias_sem_chuva': [data.dias_sem_chuva]
     }
@@ -100,8 +122,8 @@ async def Predict_Risk(data: PredictRiskRequest):
     stats = df_ref[(df_ref['mes'] == data.mes.name) & (df_ref['bioma'] == data.bioma.name)].iloc[0]
     
     risk = (pred - stats['mean']) / stats['std']
-    risk_percent = min(max((risk * 10) + 50, 1), 100)
+    risk_percent = min(max((risk[0] * 10) + 50, 1), 100)
     
     return {
-        "percentualRisco": risk_percent.tolist()
+        "percentualRisco": round(risk_percent, 2)
     }
