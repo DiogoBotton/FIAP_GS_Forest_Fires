@@ -37,9 +37,9 @@ Observação: sinais claros de overfitting (train_loss→0 vs val_loss≈0.10).
 
 Observação: excelente generalização, mas maior custo computacional.
 
-![Acurácia por época](readme-imgs/cnn_transferencia_acuracia_por_epoca.png)
+![Acurácia por época](readme-imgs/cnn_zero_acuracia_por_epoca.png)
 
-![Perda por época](readme-imgs/cnn_transferencia_perda_por_epoca.png)
+![Perda por época](readme-imgs/cnn_zero_perda_por_epoca.png)
 
 
 # Interpretação do Fine-Tuning
