@@ -3,7 +3,7 @@
 ## Descrição
 Este projeto simula um sistema de monitoramento de **temperatura**, **umidade** e **gás (MQ-2)** usando um ESP32. Quando as condições indicam risco de queimadas, um LED de alerta acende. Periodicamente, os dados são enviados à nuvem via **ThingSpeak**, onde podem ser visualizados em gráficos.
 
-![Diagrama do Projeto no Wokwi](esp32_diagrama.png)
+![Diagrama do Projeto no Wokwi](readme-imgs/esp32_diagrama.png)
 
 ## Materiais Necessários
 - Simulação no [Wokwi ESP32 Simulator](https://wokwi.com/): **Nenhum hardware físico é necessário!**
