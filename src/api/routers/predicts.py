@@ -48,8 +48,8 @@ async def Fire_Detect(file: UploadFile = File(...)):
     nofire_prob = pred[0][1]
     
     return {
-        "fire": round(fire_prob * 100, 2),
-        "nofire": round(nofire_prob * 100, 2)
+        "fire": round(float(fire_prob) * 100, 2),
+        "nofire": round(float(nofire_prob) * 100, 2)
     }
     
 @router.post("/predict-risk", summary='Realiza a previsão do risco de fogo.')
@@ -123,6 +123,7 @@ async def Predict_Risk(data: PredictRiskRequest):
     
     risk = (pred - stats['mean']) / stats['std']
     risk_percent = min(max((risk[0] * 10) + 50, 1), 100)
+    print(risk_percent)
     
     return {
         "percentualRisco": round(risk_percent, 2)
