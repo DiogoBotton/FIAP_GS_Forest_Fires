@@ -7,7 +7,7 @@
 <br>
 
 # Nome do projeto
-Monitoramento de Queimadas via Visão Computacional e Previsão de Focos de Incêndio a Partir de Análises de Séries Temporais
+Monitoramento de Queimadas via Visão Computacional e Previsão de Focos de Incêndio a Partir de Análises de Séries Temporais, este projeto faz parte do desafio da Global Solution (GS) 2025.1 
 
 ## 👨‍🎓 Integrantes: 
 - <a href="https://www.linkedin.com/in/bryanjfagundes/">Bryan Fagundes</a>
